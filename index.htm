@@ -25,47 +25,42 @@
 
         app.component('blogs-container',{
             template:`
-            <h3>All blogs</h3>
+            <h3 @load="handleClick">All blogs</h3>
             <input type="button" value="reload" @click="handleClick"/>
                 <post 
                     v-for="(item, i) in items"
                     :key="i"
                     :title="item.title"
                     :body="item.content"
-                    :author="item.author"
+                    :author="item.author_username"
                 />`,
             data(){
                 return{
                     items:[
-                        {
-                            title:'sample title',
-                            content: 'samlple body',
-                            author: 'sample author',
-                            date_posted: 'date'
-                        },
+                       
                     ],
                     url : "http://127.0.0.1:8000/api/posts/"
                 }
             },
-            methods: {
-                async handleClick(){
+             methods: {
+                async handleClick() {
                     const requestOptions = {
                         method: "GET"
                     }
 
                     fetch(this.url, requestOptions)
-                        .then(async response =>{
+                        .then(async response => {
                             const data = await response.json()
-                            if (!response.ok){
+                            if (!response.ok) {
                                 const error = (data && data.message) || response.status
                                 return Promise.reject(error)
                             }
-                            this.items = data.json()
-                            console.log(this.items)
+                            this.items = data.results
+                            console.log(data.results)
                         })
                         .catch(error => {
-                             this.errorMessage = error
-                             console.error('There was an errror!', error)
+                            this.errorMessage = error
+                            console.error('There was an errror!', error)
                         })
                 }
             },
