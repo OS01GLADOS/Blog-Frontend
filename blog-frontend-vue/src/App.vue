@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import showBlogsVue from "./components/showBlogs.vue"
+import showBlogsVue from "./components/Blogs/showBlogs.vue"
 import loginVue from "./components/Authentification/login.vue"
 import registrationVue from "./components/Authentification/registration.vue"
 
