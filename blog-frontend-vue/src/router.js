@@ -6,7 +6,7 @@ import showOneBlogVue from './components/Blogs/showOneBlog.vue';
 import profileVue from './components/Authentification/profile.vue';
 
 const routes = [
-    { path: '/', name: 'Home', component: showBlogsVue },
+    { path: '/', name: 'Home', component: showBlogsVue},
     { path: '/login', name: 'login', component: loginVue },
     { path: '/register', name: 'register', component: registrationVue },
     { path: '/blog/:id', name: 'showBlog', component: showOneBlogVue},

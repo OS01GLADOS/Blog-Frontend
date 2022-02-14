@@ -4,6 +4,9 @@ import customInputVue from "./customInput.vue"
 export default{
     name: 'Profile',
     components: {customInputVue},
+    async mounted(){
+        await this.onMount()
+    },
     data() {
         return {
             item:{
@@ -38,20 +41,7 @@ export default{
     },
     methods: {
         async onMount(){
-            const requestOptions = {method: "GET"}
-            fetch(this.url, requestOptions)
-            .then(async response =>{
-                const data = await response.json()
-                if (!response.ok){
-                    const error = (data && data.message) || response.status
-                    return Promise.reject(error)}
-                this.items = data.results
-                })
-            .catch(error => {
-                this.errorMessage = error
-                console.error('There was an errror!', error)
-                })
-            }
+            
         },
         handleSubmit(){
             if (this.inputs[2].value === this.inputs[3].value){
@@ -62,6 +52,7 @@ export default{
             }
         }
     }
+}
 </script>
 
 

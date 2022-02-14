@@ -8,6 +8,6 @@ export default{
 <template>
     <div class="container">
                 <h1><router-link :to="{name: 'showBlog', params:{ id: id} }">{{title}}</router-link></h1>
-                <p class="small">{{publish_date}}  <a href="#">{{author}}</a></p>
+                <p class="small">{{publish_date}}  <router-link :to="{name: 'Home', query:{ 'author':author}}">{{author}}</router-link></p>
             </div>
 </template>

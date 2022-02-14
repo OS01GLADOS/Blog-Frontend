@@ -16,7 +16,11 @@ export default{
     },
     methods: {
         async handleClick(){
-            const requestOptions = {method: "GET"}
+            const requestOptions = {method: "GET"
+                }
+            if(this.$route.query.author){
+                this.url=this.url+'?author='+this.$route.query.author
+            }
             fetch(this.url, requestOptions)
             .then(async response =>{
                 const data = await response.json()
