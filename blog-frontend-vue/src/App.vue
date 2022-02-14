@@ -1,4 +1,5 @@
 <template>
+
 <div class="container">
   <router-link :to="{name: 'Home'}">Home</router-link> | 
   <router-link :to="{name: 'login'}">Login</router-link> | 
@@ -10,7 +11,7 @@
 <script>
 export default {
   name: 'App',
-  token: {}
+  token:{}
 }
 </script>
 
