@@ -20,8 +20,6 @@ export default{
             const requestOptions = {
                 method: "GET"
             }
-            console.log('load post')
-
             fetch(this.url+ this.$route.params.id, requestOptions)
                 .then(async response => {
                     const data = await response.json()
@@ -30,7 +28,6 @@ export default{
                             return Promise.reject(error)
                         }
                     this.item = data
-                    console.log(data)
                 })
                 .catch(error => {
                     this.errorMessage = error

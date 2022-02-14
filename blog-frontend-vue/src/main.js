@@ -4,4 +4,6 @@ import router from './router'
 
 
 
-createApp(App).use(router).mount('#app')
+var vm = createApp(App).use(router).mount('#app')
+
+export default vm

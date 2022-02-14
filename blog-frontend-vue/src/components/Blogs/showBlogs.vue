@@ -24,7 +24,7 @@ export default{
                     const error = (data && data.message) || response.status
                     return Promise.reject(error)}
                 this.items = data.results
-                console.log(data.results)})
+                })
             .catch(error => {
                 this.errorMessage = error
                 console.error('There was an errror!', error)
@@ -37,7 +37,7 @@ export default{
     
 <template>
     <div class="container">
-        <h3 @onload="handleClick">All blogs</h3 >
+        <h3>All blogs</h3 >
         <postVue 
             v-for="(item, i) in items"
             :key="i"
