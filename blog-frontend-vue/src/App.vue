@@ -1,9 +1,9 @@
 <template>
 <div class="container">
-  <a href="#/">Home</a> |
-  <a href="#/login">Login</a> |
-  <a href="#/register">Register</a>
-  <component :is="currentView" />
+  <router-link :to="{name: 'Home'}">Home</router-link> | 
+  <router-link :to="{name: 'login'}">Login</router-link> | 
+  <router-link :to="{name: 'register'}">Register</router-link> |
+  <router-view></router-view>
 </div>
 </template>
 

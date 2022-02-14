@@ -1,47 +1,51 @@
 <script>
-import postVue from "./post.vue";
+import postFullView from "./postFullView.vue"
 export default{
     name: 'ShowOneBlog',
     data(){
         return{
-            item:{"title":"not found"} ,
+            item:{} ,
             url:"http://127.0.0.1:8000/api/posts/"
         }
     },
-    props:['id'],
     components:{
-        postVue,
+        postFullView,
         
     },
+    async mounted() {
+        await this.onMount()
+    },
     methods:{
-        async loadPost(){
+        async onMount(){
             const requestOptions = {
                 method: "GET"
             }
+            console.log('load post')
 
-            fetch(this.url+this.id, requestOptions)
+            fetch(this.url+ this.$route.params.id, requestOptions)
                 .then(async response => {
                     const data = await response.json()
                     if (!response.ok){
                             const error = (data && data.message) || response.status
                             return Promise.reject(error)
                         }
-                    this.item = data.result
-                    console.log(data.result)
+                    this.item = data
+                    console.log(data)
                 })
                 .catch(error => {
                     this.errorMessage = error
                     console.error('There was an errror!', error)
                 })
-        }
+        },
     }
 }
+
+
 </script>
 
 <template>
     <div>
-        <h1>one particular blog </h1>
-        <postVue 
+        <postFullView 
             :title="item.title"
             :body="item.content"
             :author="item.author_username"

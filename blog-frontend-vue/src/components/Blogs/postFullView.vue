@@ -7,7 +7,8 @@ export default{
 
 <template>
     <div class="container">
-                <h1><router-link :to="{name: 'showBlog', params:{ id: id} }">{{title}}</router-link></h1>
+                <h1>{{title}}</h1>
+                <p>{{body}}</p>
                 <p class="small">{{publish_date}}  <a href="#">{{author}}</a></p>
             </div>
 </template>
