@@ -14,8 +14,14 @@ export default{
     async mounted() {
         await this.handleClick()
     },
+    watch:{
+       async $route(){
+            await this.handleClick()
+        }
+    },
     methods: {
         async handleClick(){
+
             const requestOptions = {method: "GET"
                 }
             if(this.$route.query.author){
@@ -28,6 +34,7 @@ export default{
                     const error = (data && data.message) || response.status
                     return Promise.reject(error)}
                 this.items = data.results
+                this.$forceUpdate();
                 })
             .catch(error => {
                 this.errorMessage = error

@@ -4,13 +4,15 @@ import registrationVue from './components/Authentification/registration.vue';
 import showBlogsVue from './components/Blogs/showBlogs.vue'
 import showOneBlogVue from './components/Blogs/showOneBlog.vue';
 import profileVue from './components/Authentification/profile.vue';
+import authorBlogsVue from './components/Blogs/showAuthorPosts.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: showBlogsVue},
     { path: '/login', name: 'login', component: loginVue },
     { path: '/register', name: 'register', component: registrationVue },
     { path: '/blog/:id', name: 'showBlog', component: showOneBlogVue},
-    { path: '/profile/', name: 'userProfile', component:profileVue},
+    { path: '/profile/', name: 'userProfile', component: profileVue },
+    { path: '/author/blogs/', name: 'authorBlog', component: authorBlogsVue}
 ];
 
 const router = createRouter({ history: createWebHistory(), routes });
