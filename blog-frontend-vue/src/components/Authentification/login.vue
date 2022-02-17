@@ -43,6 +43,7 @@ export default {
                     document.cookie="VueBlogRefresh=dumpcookie;max-age=0";  
                     document.cookie ='VueBlog='+data.access
                     document.cookie ='VueBlogRefresh='+data.refresh
+                    console.log(data)
                     })
             .catch(error => {
                 this.errorMessage = error

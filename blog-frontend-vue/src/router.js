@@ -5,6 +5,7 @@ import showBlogsVue from './components/Blogs/showBlogs.vue'
 import showOneBlogVue from './components/Blogs/showOneBlog.vue';
 import profileVue from './components/Authentification/profile.vue';
 import authorBlogsVue from './components/Blogs/showAuthorPosts.vue';
+import ceateUpdateBlogVue from './components/Blogs/CreateUpdateBlog.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: showBlogsVue},
@@ -12,7 +13,9 @@ const routes = [
     { path: '/register', name: 'register', component: registrationVue },
     { path: '/blog/:id', name: 'showBlog', component: showOneBlogVue},
     { path: '/profile/', name: 'userProfile', component: profileVue },
-    { path: '/author/blogs/', name: 'authorBlog', component: authorBlogsVue}
+    { path: '/author/blogs/', name: 'authorBlog', component: authorBlogsVue },
+    { path: '/blog/new/', name: 'createBlog', component: ceateUpdateBlogVue },
+    { path: '/blog/:id/new', name: 'updateBlog', component: showOneBlogVue},
 ];
 
 const router = createRouter({ history: createWebHistory(), routes });

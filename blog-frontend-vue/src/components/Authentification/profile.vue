@@ -41,7 +41,6 @@ export default{
     },
     methods: {
         async onMount(){
-            alert(document.cookie)
             const token = this.getCookie('VueBlog')
             const requestOptions = {
                 method: "GET",
