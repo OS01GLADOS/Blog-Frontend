@@ -39,8 +39,10 @@ export default {
                     const error = (data && data.message) || response.status
                     return Promise.reject(error)
                     }
-                    document.cookie = 'VueBlog='+data.access
-                    document.cookie = 'VueBlogRefresh='+data.refresh
+                    document.cookie="VueBlog=dumpcookie;max-age=0";
+                    document.cookie="VueBlogRefresh=dumpcookie;max-age=0";  
+                    document.cookie ='VueBlog='+data.access
+                    document.cookie ='VueBlogRefresh='+data.refresh
                     })
             .catch(error => {
                 this.errorMessage = error

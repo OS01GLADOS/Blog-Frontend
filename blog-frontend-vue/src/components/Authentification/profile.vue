@@ -36,25 +36,29 @@ export default{
                     type: "password"
                 },
             ],
-            url:'http://127.0.0.1:8000/api/profiles/'
+            url:'http://127.0.0.1:8000/api/profiles',
         }
     },
     methods: {
         async onMount(){
+            alert(document.cookie)
             const token = this.getCookie('VueBlog')
             const requestOptions = {
                 method: "GET",
-                 headers: {
-                    'Authentication': 'beaver '+token
-                 }
+                headers: {
+                    'Authorization':' Bearer '+ token
+                }
             }
-            fetch(this.url, requestOptions)
+            fetch(this.url+'?self=true', requestOptions)
             .then(async response =>{
                 const data = await response.json()
                 if (!response.ok){
                     const error = (data && data.message) || response.status
                     return Promise.reject(error)}
                 console.log( data.results);
+                this.item = data.results[0]
+                this.inputs[0].value = this.item.username
+                this.inputs[1].value = this.item.email
             })
             .catch(error => {
                 this.errorMessage = error
@@ -64,7 +68,7 @@ export default{
         //function from https://www.tabnine.com/academy/javascript/how-to-get-cookies/
          getCookie(cName) {
             const name = cName + "=";
-            const cDecoded = decodeURIComponent(document.cookie); //to be careful
+            const cDecoded = decodeURIComponent(document.cookie); 
             const cArr = cDecoded.split('; ');
             let res;
             cArr.forEach(val => {
@@ -72,9 +76,33 @@ export default{
             })
             return res
         },
-        handleSubmit(){
+        async handleSubmit(){
             if (this.inputs[2].value === this.inputs[3].value){
-                alert('submitted: '+this.inputs[0].value + ' '+ this.inputs[1].value+ ' '+ this.inputs[2].value+ ' '+ this.inputs[3].value)
+                const token = this.getCookie('VueBlog')
+                let form = new FormData()
+                form.append('username', this.inputs[0].value)
+                form.append('email', this.inputs[1].value)
+                form.append('password', this.inputs[2].value)
+                const requestOptions = {
+                    method: "PUT",
+                    headers: {
+                        'Authorization':' Bearer '+ token
+                        },
+                    body: form
+                    }
+                fetch(this.url+'/'+this.item.id+'/', requestOptions)
+                .then(async response =>{
+                const data = await response.json()
+                if (!response.ok){
+                    const error = (data && data.message) || response.status
+                    return Promise.reject(error)}
+                await this.onMount()
+                })
+                .catch(error => {
+                    this.errorMessage = error
+                    console.error('There was an errror!', error)
+                })
+
             }
             else{
                 alert('passwords are not the same')
