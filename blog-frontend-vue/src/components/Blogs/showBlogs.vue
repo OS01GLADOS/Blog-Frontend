@@ -22,8 +22,7 @@ export default{
     methods: {
         async handleClick(){
 
-            const requestOptions = {method: "GET"
-                }
+            const requestOptions = {method: "GET"}
             if(this.$route.query.author){
                 this.url=this.url+'?author='+this.$route.query.author
             }

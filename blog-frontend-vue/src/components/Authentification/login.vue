@@ -1,6 +1,5 @@
 <script>
 import CustomInput from "./customInput.vue"
-import vm from '../../main'
 
 export default {
     name: "login",
@@ -40,8 +39,8 @@ export default {
                     const error = (data && data.message) || response.status
                     return Promise.reject(error)
                     }
-                    vm.token = data
-                    console.log(vm.token)
+                    document.cookie = 'VueBlog='+data.access
+                    document.cookie = 'VueBlogRefresh='+data.refresh
                     })
             .catch(error => {
                 this.errorMessage = error

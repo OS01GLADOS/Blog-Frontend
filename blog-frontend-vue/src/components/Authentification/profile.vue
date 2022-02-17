@@ -36,12 +36,41 @@ export default{
                     type: "password"
                 },
             ],
-            url:''
+            url:'http://127.0.0.1:8000/api/profiles/'
         }
     },
     methods: {
         async onMount(){
-            
+            const token = this.getCookie('VueBlog')
+            const requestOptions = {
+                method: "GET",
+                 headers: {
+                    'Authentication': 'beaver '+token
+                 }
+            }
+            fetch(this.url, requestOptions)
+            .then(async response =>{
+                const data = await response.json()
+                if (!response.ok){
+                    const error = (data && data.message) || response.status
+                    return Promise.reject(error)}
+                console.log( data.results);
+            })
+            .catch(error => {
+                this.errorMessage = error
+                console.error('There was an errror!', error)
+                })
+        },
+        //function from https://www.tabnine.com/academy/javascript/how-to-get-cookies/
+         getCookie(cName) {
+            const name = cName + "=";
+            const cDecoded = decodeURIComponent(document.cookie); //to be careful
+            const cArr = cDecoded.split('; ');
+            let res;
+            cArr.forEach(val => {
+                if (val.indexOf(name) === 0) res = val.substring(name.length);
+            })
+            return res
         },
         handleSubmit(){
             if (this.inputs[2].value === this.inputs[3].value){
