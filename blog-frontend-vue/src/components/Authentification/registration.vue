@@ -28,17 +28,37 @@ export default {
                         type: "password"
                     },
                 ],
-                url:''
+                url:'http://127.0.0.1:8000/api/profiles/'
             }
         },
     methods:{
-        handleSubmit(){
-            if (this.inputs[2].value === this.inputs[3].value){
-                alert('submitted: '+this.inputs[0].value + ' '+ this.inputs[1].value+ ' '+ this.inputs[2].value+ ' '+ this.inputs[3].value)
-            }
-            else{
-                alert('passwords are not the same')
-            }
+        async handleSubmit(){
+                if (this.inputs[2].value === this.inputs[3].value){
+                    let form = new FormData()
+                    form.append('username', this.inputs[0].value)
+                    form.append('email', this.inputs[1].value)
+                    form.append('password', this.inputs[2].value)
+                    const requestOptions = {
+                        method: "POST",
+                        body: form
+                        }
+                    fetch(this.url, requestOptions)
+                    .then(async response =>{
+                        const data = await response.json()
+                        if (!response.ok){
+                            const error = (data && data.message) || response.status
+                            return Promise.reject(error)}
+                            this.$router.push({name: 'login'})
+                        })
+                    .catch(error => {
+                        this.errorMessage = error
+                        console.error('There was an errror!', error)
+                    })
+                }
+                
+                else{
+                    alert('passwords are not the same')
+                }
             }
         }
 }
