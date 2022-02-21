@@ -15,7 +15,7 @@ const routes = [
     { path: '/profile/', name: 'userProfile', component: profileVue },
     { path: '/author/blogs/', name: 'authorBlog', component: authorBlogsVue },
     { path: '/blog/new/', name: 'createBlog', component: ceateUpdateBlogVue },
-    { path: '/blog/:id/new', name: 'updateBlog', component: showOneBlogVue},
+    { path: '/blog/:id/update', name: 'updateBlog', component: showOneBlogVue},
 ];
 
 const router = createRouter({ history: createWebHistory(), routes });

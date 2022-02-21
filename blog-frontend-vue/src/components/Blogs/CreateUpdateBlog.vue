@@ -28,8 +28,13 @@ export default {
     },
     methods:{
         async set_submit_value(){
-            if (this.$route.query.newBlog){
+            if (this.$route.query.new === 'True'){
                 this.submit_label = "Create blog"
+                this.url = "http://127.0.0.1:8000/api/posts/"
+                this.method = "POST"
+            }
+            else{
+                this.submit_label = "Update blog"
                 this.url = "http://127.0.0.1:8000/api/posts/"
             }
         },
@@ -57,7 +62,18 @@ export default {
                     this.errorMessage = error
                     console.error('There was an errror!', error)
                 })
+        },
+        getCookie(cName){
+            const name = cName + "=";
+            const cDecoded = decodeURIComponent(document.cookie); 
+            const cArr = cDecoded.split('; ');
+            let res;
+            cArr.forEach(val => {
+                if (val.indexOf(name) === 0) res = val.substring(name.length);
+                    })
+                return res
         }
+        
     }
 }
 </script>

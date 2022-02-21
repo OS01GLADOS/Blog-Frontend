@@ -5,7 +5,7 @@
   <router-link :to="{name: 'login'}">Login</router-link> | 
   <router-link :to="{name: 'register'}">Register</router-link> | 
   <router-link :to="{name: 'userProfile'}">Profile</router-link> | 
-  <router-link :to="{name: 'createBlog', query:{'newBlod':true}}">CreateBlog</router-link>
+  <router-link :to="{name: 'createBlog', query:{ 'new':'True'}}">CreateBlog</router-link>
   <router-view></router-view>
 </div>
 </template>
@@ -15,7 +15,6 @@ export default {
   name: 'App',
   token:{}
 }
-//store token 
 </script>
 
 
