@@ -1,5 +1,6 @@
 <script>
 import customInputVue from "./customInput.vue"
+import getCookie from "../../getCookie"
 
 export default{
     name: 'Profile',
@@ -41,7 +42,7 @@ export default{
     },
     methods: {
         async onMount(){
-            const token = this.getCookie('VueBlog')
+            const token = getCookie('VueBlog')
             const requestOptions = {
                 method: "GET",
                 headers: {
@@ -64,20 +65,9 @@ export default{
                 console.error('There was an errror!', error)
                 })
         },
-        //function from https://www.tabnine.com/academy/javascript/how-to-get-cookies/
-         getCookie(cName) {
-            const name = cName + "=";
-            const cDecoded = decodeURIComponent(document.cookie); 
-            const cArr = cDecoded.split('; ');
-            let res;
-            cArr.forEach(val => {
-                if (val.indexOf(name) === 0) res = val.substring(name.length);
-            })
-            return res
-        },
         async handleSubmit(){
             if (this.inputs[2].value === this.inputs[3].value){
-                const token = this.getCookie('VueBlog')
+                const token = getCookie('VueBlog')
                 let form = new FormData()
                 form.append('username', this.inputs[0].value)
                 form.append('email', this.inputs[1].value)

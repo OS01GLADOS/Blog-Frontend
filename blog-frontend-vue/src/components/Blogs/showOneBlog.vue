@@ -1,5 +1,7 @@
 <script>
 import postFullView from "./postFullView.vue"
+import getCookie from "../../getCookie"
+
 export default{
     name: 'ShowOneBlog',
     data(){
@@ -15,19 +17,11 @@ export default{
         
     },
     async mounted() {
-        this.ifAuthor(). then(
-            this.getUser()
-            .then(
-                this.onMount()
-            )
-        )
+        await this.onMount()
     },
     methods:{
-        async ifAuthor(){
-            console.log('if author')
-        },
-        async getUser(){
-            const token = this.getCookie('VueBlog')
+        getUser(){
+            const token = getCookie('VueBlog')
             const requestOptions = {
                 method: "GET",
                 headers: {
@@ -40,8 +34,8 @@ export default{
                 if (!response.ok){
                     const error = (data && data.message) || response.status
                     return Promise.reject(error)}
-                this.user_id = data.results[0].id
-                console.log (this.user_id)
+                return data.results[0].id
+
                 
             })
             .catch(error => {
@@ -50,7 +44,8 @@ export default{
                 })
         },
         async onMount(){
-            const token = this.getCookie('VueBlog')
+            
+            const token = getCookie('VueBlog')
             const requestOptions = {
                 method: "GET",
                 headers: {
@@ -66,32 +61,21 @@ export default{
                         }
                     this.item = data
                     console.log(this.item.author_id)
+                    return data.author_id
                 })
                 .catch(error => {
                     this.errorMessage = error
                     console.error('There was an errror!', error)
                 })
-        },
-        getCookie(cName){
-            const name = cName + "=";
-            const cDecoded = decodeURIComponent(document.cookie); 
-            const cArr = cDecoded.split('; ');
-            let res;
-            cArr.forEach(val => {
-                if (val.indexOf(name) === 0) res = val.substring(name.length);
-                    })
-                return res
         }
     }
 }
-
-
 </script>
 
 <template>
-    <div>
-        <router-link :to="{name: 'updateBlog', params:{ id: this.$route.params.id} }">update blog</router-link>
-        <router-link :to="{name: 'deleteBlog', params:{ id: this.$route.params.id} }">delete blog</router-link>
+    <div class="mt-2">
+        <router-link class="btn btn-secondary" :to="{name: 'updateBlog', params:{ id: this.$route.params.id} }">update blog</router-link>
+        <router-link class="ms-3 btn btn-danger" :to="{name: 'deleteBlog', params:{ id: this.$route.params.id} }">delete blog</router-link>
         <postFullView 
             :title="item.title"
             :body="item.content"
@@ -100,3 +84,4 @@ export default{
         />
     </div>
 </template>
+

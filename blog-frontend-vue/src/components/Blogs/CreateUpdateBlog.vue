@@ -1,5 +1,6 @@
 <script>
 import customInputVue from "../Authentification/customInput.vue"
+import getCookie from "../../getCookie"
 
 export default {
     name: 'registration',
@@ -28,7 +29,7 @@ export default {
     },
     methods:{
         async onMount(){
-            const token = this.getCookie('VueBlog')
+            const token = getCookie('VueBlog')
             const requestOptions = {
                 method: "GET",
                 headers: {
@@ -68,7 +69,7 @@ export default {
             let form = new FormData()
             form.append('title', this.inputs[0].value)
             form.append('content', this.inputs[1].value)
-            const token = this.getCookie('VueBlog')
+            const token = getCookie('VueBlog')
             const requestOptions = {
                     method: this.method,
                     headers: {
@@ -88,16 +89,6 @@ export default {
                     this.errorMessage = error
                     console.error('There was an errror!', error)
                 })
-        },
-        getCookie(cName){
-            const name = cName + "=";
-            const cDecoded = decodeURIComponent(document.cookie); 
-            const cArr = cDecoded.split('; ');
-            let res;
-            cArr.forEach(val => {
-                if (val.indexOf(name) === 0) res = val.substring(name.length);
-                    })
-                return res
         }
         
     }

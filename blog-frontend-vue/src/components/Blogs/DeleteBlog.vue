@@ -1,19 +1,14 @@
 <script>
+import getCookie from "../../getCookie";
+
 export default{
     name: "deleteBlogVue",
     methods:{
-        getCookie(cName){
-            const name = cName + "=";
-            const cDecoded = decodeURIComponent(document.cookie); 
-            const cArr = cDecoded.split('; ');
-            let res;
-            cArr.forEach(val => {
-                if (val.indexOf(name) === 0) res = val.substring(name.length);
-                    })
-                return res
+        goBack(){
+            this.$router.push({name: 'Home'})
         },
         async handleSubmit(){
-            const token = this.getCookie('VueBlog')
+            const token = getCookie('VueBlog')
             const requestOptions = {
                     method: "DELETE",
                     headers: {
@@ -39,8 +34,8 @@ export default{
 <template>
     <h1>Are you sure?</h1>
     <p>delete blog {{$route.params.id}} </p>
-    <form @submit.prevent="handleSubmit"> 
-        <input class="btn btn-primary mt-2" type=submit value="Yes, delete blog ">
-        <input class="btn btn-primary mt-2" type=dismiss value="back">
+    <form @submit.prevent="handleSubmit" class="mt2-"> 
+        <input class="btn btn-danger" type=submit value="Yes, delete blog ">
+        <input class="btn btn-primary ms-2" type=reset @click="goBack" value="back">
     </form>
 </template>
