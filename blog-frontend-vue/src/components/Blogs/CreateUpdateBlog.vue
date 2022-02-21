@@ -27,6 +27,30 @@ export default {
         await this.set_submit_value()
     },
     methods:{
+        async onMount(){
+            const token = this.getCookie('VueBlog')
+            const requestOptions = {
+                method: "GET",
+                headers: {
+                        'Authorization':' Bearer '+ token
+                        },
+            }
+            fetch("http://127.0.0.1:8000/api/posts/"+ this.$route.params.id, requestOptions)
+                .then(async response => {
+                    const data = await response.json()
+                    if (!response.ok){
+                            const error = (data && data.message) || response.status
+                            return Promise.reject(error)
+                        }
+                    this.inputs[0].value = data.title
+                    this.inputs[1].value = data.content
+                    console.log(this.item)
+                })
+                .catch(error => {
+                    this.errorMessage = error
+                    console.error('There was an errror!', error)
+                })
+        },
         async set_submit_value(){
             if (this.$route.query.new === 'True'){
                 this.submit_label = "Create blog"
@@ -35,7 +59,9 @@ export default {
             }
             else{
                 this.submit_label = "Update blog"
-                this.url = "http://127.0.0.1:8000/api/posts/"
+                this.url = "http://127.0.0.1:8000/api/posts/"+this.$route.params.id+ "/"
+                this.onMount()
+                this.method = "PUT"
             }
         },
         async handleSubmit(){
