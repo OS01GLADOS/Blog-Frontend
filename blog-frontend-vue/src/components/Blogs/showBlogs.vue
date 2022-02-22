@@ -53,7 +53,7 @@ export default{
             :key="i"
             :id="item.id"
             :title="item.title"
-            :body="item.content"
+            :body_raw="item.content"
             :author="item.author_username"
             :publish_date="item.date_posted"
         />

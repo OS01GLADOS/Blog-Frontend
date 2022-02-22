@@ -78,7 +78,7 @@ export default{
         <router-link class="ms-3 btn btn-danger" :to="{name: 'deleteBlog', params:{ id: this.$route.params.id} }">delete blog</router-link>
         <postFullView 
             :title="item.title"
-            :body="item.content"
+            :body_raw="item.content"
             :author="item.author_username"
             :publish_date="item.date_posted" 
         />
