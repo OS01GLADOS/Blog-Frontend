@@ -37,7 +37,7 @@ export default{
                     type: "password"
                 },
             ],
-            url:'http://127.0.0.1:8000/api/profiles',
+            url:'http://blog:8000/api/profiles',
         }
     },
     methods: {

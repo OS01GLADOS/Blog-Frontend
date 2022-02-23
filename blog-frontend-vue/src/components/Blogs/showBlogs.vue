@@ -7,7 +7,7 @@ export default{
     data(){
         return{
             items:[],
-            url : "http://127.0.0.1:8000/api/posts/"
+            url : "http://blog:8000/api/posts/"
             }
     },
     components:{postVue},
@@ -53,7 +53,7 @@ export default{
             :key="i"
             :id="item.id"
             :title="item.title"
-            :body_raw="item.content"
+            :body="item.content"
             :author="item.author_username"
             :publish_date="item.date_posted"
         />

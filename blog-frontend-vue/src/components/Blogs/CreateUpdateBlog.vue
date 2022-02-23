@@ -36,7 +36,7 @@ export default {
                         'Authorization':' Bearer '+ token
                         },
             }
-            fetch("http://127.0.0.1:8000/api/posts/"+ this.$route.params.id, requestOptions)
+            fetch("http://blog:8000/api/posts/"+ this.$route.params.id, requestOptions)
                 .then(async response => {
                     const data = await response.json()
                     if (!response.ok){
@@ -55,12 +55,12 @@ export default {
         async set_submit_value(){
             if (this.$route.query.new === 'True'){
                 this.submit_label = "Create blog"
-                this.url = "http://127.0.0.1:8000/api/posts/"
+                this.url = "http://blog:8000/api/posts/"
                 this.method = "POST"
             }
             else{
                 this.submit_label = "Update blog"
-                this.url = "http://127.0.0.1:8000/api/posts/"+this.$route.params.id+ "/"
+                this.url = "http://blog:8000/api/posts/"+this.$route.params.id+ "/"
                 this.onMount()
                 this.method = "PUT"
             }

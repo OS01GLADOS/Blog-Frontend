@@ -18,7 +18,7 @@ export default {
                         type: "password"
                     },
                 ],
-                url:'http://127.0.0.1:8000/api/token/'
+                url:'http://blog:8000/api/token/'
             }
             
         },

@@ -15,7 +15,7 @@ export default{
                         'Authorization':' Bearer '+ token
                         },
             }
-            fetch("http://127.0.0.1:8000/api/posts/"+this.$route.params.id+"/", requestOptions)
+            fetch("http://blog:8000/api/posts/"+this.$route.params.id+"/", requestOptions)
             .then(async response =>{
                 if (response.status != 204){
                     const error = ('there was an error while deleting') || response.status
