@@ -6,7 +6,8 @@ export default{
     
     data(){
         return{
-            data_content: ''
+            data_content: '',
+            pics : []
         }
     },
     mounted(){
@@ -21,6 +22,8 @@ export default{
                             return Promise.reject(error)
                         }
                     this.data_content = data.content
+                    this.pics = data.pics
+                    console.log(this.pics)
                     return data.author_id
                 })
                 .catch(error => {
@@ -41,6 +44,9 @@ export default{
            /*
            https://www.youtube.com/embed/
            */
+           /*
+            |image|(image)|image|
+           */
     },
 }
 </script>
@@ -49,5 +55,9 @@ export default{
                 <h1>{{title}}</h1>
                 <p v-html="styled_body"></p>
                 <p class="small">{{publish_date}}  <router-link :to="{name: 'authorBlog', query:{ 'author':author}}">{{author}}</router-link></p>
+                <div>
+                    <p>Related pics</p>
+                    <tr v-for=" pic in pics" :key="pic.id"><img :src="pic.image"/></tr>
+                </div>
             </div>
 </template>

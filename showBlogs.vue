@@ -21,7 +21,7 @@ export default{
                 return{
                     items:[
                     ],
-                    url : "http://127.0.0.1:8000/api/posts/"
+                    url : "http://blog:8000/api/posts/"
                 }
             },
             components:{post},
