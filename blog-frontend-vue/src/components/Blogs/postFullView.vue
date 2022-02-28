@@ -50,7 +50,7 @@ export default{
                         })
                        
                     })
-                    res = res.replace(/\|\|(.*)\|\|/,'<br><img src="$1"/><br>')
+                    res = res.replace(/\|\|(.*)\|\|/,'<br><img width="500" src="$1"/><br>')
                     return res
                 },
                 set(value){
