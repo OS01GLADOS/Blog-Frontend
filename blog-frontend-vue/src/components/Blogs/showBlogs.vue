@@ -1,13 +1,14 @@
 <script>
 
 import postVue from "./post.vue"
+import HOST from "../../host"
 
 export default{
     name:'ShowBlogs',
     data(){
         return{
             items:[],
-            url : "http://blog:8000/api/posts/"
+            url : HOST+"/api/posts/"
             }
     },
     components:{postVue},

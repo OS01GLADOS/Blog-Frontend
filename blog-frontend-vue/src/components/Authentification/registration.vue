@@ -1,5 +1,6 @@
 <script>
 import CustomInput from "./customInput.vue"
+import HOST from "../../host"
 
 export default {
     name: 'registration',
@@ -28,7 +29,7 @@ export default {
                         type: "password"
                     },
                 ],
-                url:'http://blog:8000/api/profiles/'
+                url:HOST+'/api/profiles/'
             }
         },
     methods:{

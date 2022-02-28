@@ -1,6 +1,7 @@
 <script>
 import customInputVue from "./customInput.vue"
 import getCookie from "../../getCookie"
+import HOST from "../../host"
 
 export default{
     name: 'Profile',
@@ -37,7 +38,7 @@ export default{
                     type: "password"
                 },
             ],
-            url:'http://blog:8000/api/profiles',
+            url:HOST+'/api/profiles',
         }
     },
     methods: {

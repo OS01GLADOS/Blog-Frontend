@@ -1,4 +1,5 @@
 <script>
+import HOST from "../../host"
 
 export default{
     name: 'post',
@@ -14,7 +15,7 @@ export default{
             const requestOptions = {
                 method: "GET",
             }
-            fetch("http://blog:8000/api/posts/"+ this.$route.params.id, requestOptions)
+            fetch(HOST+"/api/posts/"+ this.$route.params.id, requestOptions)
                 .then(async response => {
                     const data = await response.json()
                     if (!response.ok){
@@ -57,7 +58,10 @@ export default{
                 <p class="small">{{publish_date}}  <router-link :to="{name: 'authorBlog', query:{ 'author':author}}">{{author}}</router-link></p>
                 <div>
                     <p>Related pics</p>
-                    <tr v-for=" pic in pics" :key="pic.id"><img :src="pic.image"/></tr>
+                    <div v-for=" pic in pics" :key="pic.id">
+                        <p>{{pic.image_number}}</p>
+                        <img :src="pic.image"/>
+                        </div>
                 </div>
             </div>
 </template>

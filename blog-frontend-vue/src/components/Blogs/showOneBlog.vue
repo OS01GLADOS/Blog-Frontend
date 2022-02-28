@@ -1,13 +1,14 @@
 <script>
 import postFullView from "./postFullView.vue"
 import getCookie from "../../getCookie"
+import HOST from "../../host"
 
 export default{
     name: 'ShowOneBlog',
     data(){
         return{
             item:{} ,
-            url:"http://blog:8000/api/posts/",
+            url: HOST+"/api/posts/",
             user_id: 0,
             author_id: 0
         }
@@ -28,7 +29,7 @@ export default{
                     'Authorization':' Bearer '+ token
                 }
             }
-            fetch('http://blog:8000/api/profiles/?self=true', requestOptions)
+            fetch(HOST+'/api/profiles/?self=true', requestOptions)
             .then(async response =>{
                 const data = await response.json()
                 if (!response.ok){
