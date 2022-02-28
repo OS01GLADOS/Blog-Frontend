@@ -24,7 +24,6 @@ export default{
                         }
                     this.data_content = data.content
                     this.pics = data.pics
-                    console.log(this.pics)
                     return data.author_id
                 })
                 .catch(error => {
@@ -36,19 +35,38 @@ export default{
         styled_body:{
                 get(){
                     const re = /https?:\/\/www.youtube.com\/watch\?v=(\S*)/;
-                    return this.data_content.replace(re,'<br><iframe width="560" height="315" src="https://www.youtube.com/embed/$1"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; gyroscope; picture-in-picture" allowfullscreen></iframe><br>' )
+                    let res = this.data_content.replace(re,'<br><iframe width="560" height="315" src="https://www.youtube.com/embed/$1"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; gyroscope; picture-in-picture" allowfullscreen></iframe><br>' )
+                    const re1 = /\|\|(\d)\|\|/;
+                    let pics1 = this.pics
+                    res = res.replace(re1, function(x){
+                        return x.replace(/\d/, function(z){
+                            if(pics1.length >0){
+                            console.log(z)
+                            let index = z
+                            console.log(index)
+                            return pics1[index]['image']
+                        }
+                        return ''
+                        })
+                       
+                    })
+                    res = res.replace(/\|\|(.*)\|\|/,'<br><img src="$1"/><br>')
+                    return res
                 },
                 set(value){
                     this.data_content = value
                 }
            }
-           /*
-           https://www.youtube.com/embed/
-           */
-           /*
-            |image|(image)|image|
-           */
     },
+    methods:{
+        getLink(id){
+            if(this.pics.length >0){
+                console.log(id)
+                return this.pics[id]['image']
+            }
+            return ''
+        }
+    }
 }
 </script>
 <template>
@@ -56,12 +74,5 @@ export default{
                 <h1>{{title}}</h1>
                 <p v-html="styled_body"></p>
                 <p class="small">{{publish_date}}  <router-link :to="{name: 'authorBlog', query:{ 'author':author}}">{{author}}</router-link></p>
-                <div>
-                    <p>Related pics</p>
-                    <div v-for=" pic in pics" :key="pic.id">
-                        <p>{{pic.image_number}}</p>
-                        <img :src="pic.image"/>
-                        </div>
-                </div>
             </div>
 </template>

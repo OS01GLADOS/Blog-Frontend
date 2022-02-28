@@ -56,7 +56,6 @@ export default{
                 if (!response.ok){
                     const error = (data && data.message) || response.status
                     return Promise.reject(error)}
-                console.log( data.results);
                 this.item = data.results[0]
                 this.inputs[0].value = this.item.username
                 this.inputs[1].value = this.item.email

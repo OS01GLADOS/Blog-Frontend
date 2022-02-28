@@ -79,7 +79,7 @@ export default {
         addPicField(){
             this.pics.push({
                 s3_folder : 'posts_pictures',
-                api_add_link: 'http://blog:8000/api/postPics/'
+                api_add_link: HOST+'/api/postPics/'
             })
         },
         handleInput(i){
@@ -147,4 +147,12 @@ export default {
         
         <p><input class="btn btn-primary mt-2" type=submit  :value="submit_label"></p>
     </form>
+
+                    <div>
+                    <p>Related pics</p>
+                    <div v-for=" pic in post_pics" :key="pic.id">
+                        <p>{{pic.image_number}}</p>
+                        <img :src="pic.image"/>
+                        </div>
+                </div>
 </template>

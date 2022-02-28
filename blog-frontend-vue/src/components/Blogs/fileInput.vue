@@ -1,8 +1,4 @@
 <script>
-//HEADER x-amz-acl: public-read
-//http://blog:8000/api/geterate-upload-link/?filename=test/pic.png
-//METHOD put
-
 import HOST from "../../host";
 import getCookie from "../../getCookie"
 
@@ -33,7 +29,6 @@ export default{
             this.image = files[0]
             this.disable_input = false
             this.filename = files[0].name
-            console.log(this.filename, this.image)
             },
 
         
@@ -42,7 +37,6 @@ export default{
         //3 upload imagelink to api
             function sendDataToDB(id, img_num, img_link){
             let form = new FormData()
-            console.log(img_link)
             form.append('image_number', img_num)
             form.append('post', HOST+"/post/"+id+"/")
             form.append('image', img_link)
